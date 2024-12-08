@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-%)gvou37s_(*!1@o)$&y4^&9*7j52a0#7b5*4_ke%iw+d%q28g
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://kookie.onrender.com']
+ALLOWED_HOSTS = ['kookie.onrender.com']
 
 SESSION_ENGINE = "django.contrib.sessions.backends.db"
 
