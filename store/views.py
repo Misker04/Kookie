@@ -8,7 +8,9 @@ from django.http import JsonResponse
 import uuid
 from django.http import JsonResponse
 from google.cloud import dialogflow_v2 as dialogflow
+from django.views.decorators.csrf import csrf_exempt
 
+@csrf_exempt
 def dialogflow_query(request):
     if request.method == "POST":
         # Get or generate a session ID
