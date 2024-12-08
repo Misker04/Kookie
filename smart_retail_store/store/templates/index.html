@@ -1,0 +1,117 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice-Controlled Smart Retail Store</title>
+    <script>
+        // Function to get CSRF token from the cookie
+        function getCSRFToken() {
+            const csrfToken = document.cookie.match(/csrftoken=([\w-]+)/);
+            return csrfToken ? csrfToken[1] : '';
+        }
+
+        function startVoiceRecognition() {
+            const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            recognition.lang = 'en-US';
+            recognition.start();
+
+            recognition.onresult = function(event) {
+                const voiceCommand = event.results[0][0].transcript;
+                document.getElementById('voiceInput').value = voiceCommand;
+                processCommand(voiceCommand);
+            };
+
+            recognition.onerror = function(event) {
+                console.error(event.error);
+            };
+        }
+
+        function processCommand(command) {
+            // Get the CSRF token from the cookies
+            const csrfToken = getCSRFToken();
+
+            fetch('/process_command/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken  // Include CSRF token here
+                },
+                body: JSON.stringify({ command: command })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('response').innerText = data.response;
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</head>
+<body>
+    <h1>Voice-Controlled Smart Retail Store</h1>
+    <button onclick="startVoiceRecognition()">Speak</button>
+    <input type="text" id="voiceInput" readonly/>
+    <div id="response"></div>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat with Bot</title>
+</head>
+<body>
+    <h1>Chat with the Bot</h1>
+
+    <!-- Input field and button for user query -->
+    <div>
+        <input type="text" id="userInput" placeholder="Type your message here">
+        <button onclick="handleSend()">Send</button>
+    </div>
+
+    <!-- Display bot's response -->
+    <div id="botResponse"></div>
+
+    <script>
+        // Function to get CSRF token from the cookie
+        function getCSRFToken() {
+            const csrfToken = document.cookie.match(/csrftoken=([\w-]+)/);
+            return csrfToken ? csrfToken[1] : '';
+        }
+
+        // Function to send the user input to the backend and fetch the response
+        async function sendQuery(userInput) {
+            const csrfToken = getCSRFToken();
+            const response = await fetch('/dialogflow-query/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken  // Include CSRF token here
+                },
+                body: JSON.stringify({ query: userInput }),
+            });
+            const data = await response.json();
+            return data.fulfillment_text; // Return the bot's response
+        }
+
+        // Function to handle button click
+        function handleSend() {
+            const userInput = document.getElementById("userInput").value;
+            if (userInput.trim()) {
+                sendQuery(userInput).then(botResponse => {
+                    // Display the response in the "botResponse" div
+                    document.getElementById("botResponse").innerText = botResponse;
+                }).catch(error => {
+                    console.error("Error fetching Dialogflow response:", error);
+                    document.getElementById("botResponse").innerText = "Sorry, something went wrong!";
+                });
+            } else {
+                document.getElementById("botResponse").innerText = "Please enter a message.";
+            }
+        }
+    </script>
+</body>
+</html>
