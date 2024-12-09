@@ -81,11 +81,14 @@ WSGI_APPLICATION = 'smart_retail_store.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config(
-        # Replace this value with your local database's connection string.
-        default='postgresql://kookiedb_user:4bmRwd38XN0ki5eYfJmOvpG2mzWMBdr3@dpg-ctah680gph6c73eonttg-a/kookiedb',
-        conn_max_age=600
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'kookiedatabase',  # Replace with your DB name
+        'USER': 'p933254111181-g1unjl@gcp-sa-cloud-sql.iam.gserviceaccount.com',  # Replace with your DB user
+        'PASSWORD': '(^l:U2V<=Gq(js{D',  # Replace with your DB password
+        'HOST': '/cloudsql/mygcpproject-438000:us-central1:kookiedatabase',  # Cloud SQL instance connection name
+        'PORT': '5432',
+    }
 }
 
 
