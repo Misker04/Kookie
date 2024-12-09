@@ -5,3 +5,4 @@ gunicorn
 uvicorn
 django
 google-cloud-dialogflow
+google-cloud-sql
