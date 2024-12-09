@@ -14,7 +14,7 @@ from pathlib import Path
 import os
 import dj_database_url
 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/etc/secrets/mygcpproject-438000-6d9d42943636.json"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/etc/secrets/mygcpproject-438000-2908da3f3f85.json"
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
