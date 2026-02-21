@@ -4,7 +4,6 @@ Kookie is a voice-interactive “smart retail store” assistant that helps shop
 
 This repository contains the Django-based web application that powers the core experience and integrates with Google Cloud Dialogflow for intent detection.
 
----
 
 ## Project context
 
@@ -17,7 +16,6 @@ High-level goals:
 - Customer support Q&A (e.g., “How can I return a product?”)
 - Feedback collection via voice/chat style interaction
 
----
 
 ## Architecture (high level)
 
@@ -38,7 +36,6 @@ High-level goals:
 
 > Note: This repo primarily includes the Django app and its Dialogflow integration. Some infrastructure elements (e.g., Redis, STT/TTS device pipeline) are part of the broader project design.
 
----
 
 ## What’s in this repo
 
@@ -50,7 +47,6 @@ Top-level structure (main):
 - `build.sh` — helper script (install deps, collectstatic, migrate)
 - `db.sqlite3` — a local SQLite DB snapshot (useful for quick local demo)
 
----
 
 ## Features (implemented in code)
 
@@ -93,7 +89,6 @@ Supports multi-turn feedback:
 - Then: user submits a comment message
 - Stored in `Feedback`
 
----
 
 ## Data model
 
@@ -104,8 +99,6 @@ Defined in `store/models.py`:
 - `StoreSection`: name, description, location
 - `Support`: query, response
 - `Feedback`: comments, created_at
-
----
 
 ## Getting started (local development)
 
@@ -166,7 +159,6 @@ python manage.py runserver
 Then open:
 - http://127.0.0.1:8000/
 
----
 
 ## Usage examples
 
@@ -179,7 +171,6 @@ Try POSTing commands to the `process_command` endpoint (or use the UI, depending
 - `return policy`
 - `feedback` → then send your feedback message
 
----
 
 ## Testing & observability (project design)
 
@@ -190,8 +181,6 @@ The broader project design includes:
   - Speech-to-text latency under heavy concurrency
   - Database query performance on large inventories
   - Scaling microservices under high traffic
-
----
 
 ## Deployment notes
 
@@ -204,13 +193,6 @@ This repo also includes a `build.sh` script that performs:
 
 If you deploy to a platform like Render/Heroku/GKE, adapt `ALLOWED_HOSTS`, `DEBUG`, and secrets accordingly.
 
----
-
-## License
-
-If you plan to open-source this beyond coursework, add a LICENSE file to clarify usage rights.
-
----
 
 ## Acknowledgments
 
